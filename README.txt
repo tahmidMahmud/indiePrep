@@ -1,0 +1,1 @@
+This repository is full of solutions to basic problems in order to prep for technical interviews 
