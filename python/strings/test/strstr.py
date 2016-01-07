@@ -11,6 +11,16 @@ class Test(unittest.TestCase):
 		
 		self.assertTrue(True)
 
+	def test_NeedleNotFound(self):
+		testString = strstr("name@email.com", '?')
+
+		self.assertEqual(testString, None)
+
+	def test_HaystackIsNone(self):
+		testString = strstr(None, '?')
+
+		self.assertEqual(testString, None)
+
 	def test_findOneCharNeedleInHaystack(self):
 		testString = strstr("name@email.com", '@')
 
