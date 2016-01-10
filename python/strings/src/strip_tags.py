@@ -1,27 +1,29 @@
 def strip_tags(string, allowable_tags = None):
-	if string != None:
+	allowableTags = list()
+	if allowable_tags != None:
+		i = 0
+		while i < len(allowable_tags):
+			if allowable_tags[i] == '>':
+				allowable_tags = allowable_tags[:i+1] + ' ' + allowable_tags[i+1:]
+			i = i + 1
+		allowableTags = allowable_tags.split(' ')
+		for i in range(len(allowableTags)):
+			allowableTags.append(allowableTags[i][:1]+'/'+allowableTags[i][1:])
 
-		lengthOfStr = len(string)
-		
-		def symbolFinder (n, str): return lambda x: str[x] == n
-		lessThanSymbol = list(filter(symbolFinder('<', string), range(lengthOfStr)))
-		greaterThanSymbol = list(filter(symbolFinder('>', string), range(lengthOfStr)))
-		
-		numberOfTags = len(lessThanSymbol)
-		tags = [string[lessThanSymbol[i]:greaterThanSymbol[i]+1] for i in range(numberOfTags)]
-
-		if allowable_tags != None:
-
-			lengthOfAllowableString = len(allowable_tags)
-			allowable_lessThanSymbol = list(filter(symbolFinder('<', allowable_tags), range(lengthOfAllowableString)))
-			allowable_greaterThanSymbol = list(filter(symbolFinder('>', allowable_tags), range(lengthOfAllowableString)))
-		
-			numberOfAllowableTags = len(allowable_lessThanSymbol)
-			AllowableTags = [string[allowable_lessThanSymbol[i]:allowable_greaterThanSymbol[i]+1] for i in range(numberOfAllowableTags)]
-
-			def allowedTagFilter (n): return lambda x: tags[x] == n
-		
-		if numberOfTags > 0:
-			return ''.join(string[greaterThanSymbol[i]+1:lessThanSymbol[i+1]] for i in range(numberOfTags-1))
-	
+	i = 0
+	start = -1
+	while i < len(string):
+		if string[i] == '<':
+			j = i + 1
+			while j < len(string):
+				if string[j] == '>':
+					if allowable_tags!= None and string[i:j+1] in allowableTags:
+						start = j
+						i = start
+					else:
+						string = string[:i] + string[j+1:]
+						i = start
+					j = len(string)
+				j = j + 1
+		i= i + 1
 	return string

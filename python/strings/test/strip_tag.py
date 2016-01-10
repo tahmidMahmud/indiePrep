@@ -26,6 +26,25 @@ class Test(unittest.TestCase):
 
 		self.assertEqual(tagless, 'helloGoodbye')
 
+	def test_StringAllowableTags(self):
+		tagless = strip_tags('<p>hello</p>', '<p>')
+
+		self.assertEqual(tagless, '<p>hello</p>')
+
+	def test_twoStringAllowOneTags(self):
+		tagless = strip_tags('<p>hello</p><a>Goodbye</a>', '<p>')
+
+		self.assertEqual(tagless, '<p>hello</p>Goodbye')
+
+	def test_twoStringAllowOtherTags(self):
+		tagless = strip_tags('<p>hello</p><a>Goodbye</a>', '<a>')
+
+		self.assertEqual(tagless, 'hello<a>Goodbye</a>')
+
+	def test_Allow2tagsBlock1tag(self):
+		tagless = strip_tags('<p>hello</p><a>Goodbye</a><c>Goodbye</c>', '<p><a>')
+
+		self.assertEqual(tagless, '<p>hello</p><a>Goodbye</a>Goodbye')
 
 
 if __name__ == '__main__':
