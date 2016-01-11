@@ -20,7 +20,11 @@ class Test(unittest.TestCase):
 		test = explode(' ', '1 2 3')
 		
 		self.assertEqual(test, ['1', '2', '3'])
-
+	
+	def test_Explode3ItemsSeperatedByComma(self):
+		test = explode(',', '1,2,3')
+		
+		self.assertEqual(test, ['1', '2', '3'])
 
 if __name__ == '__main__':
 	unittest.main()
