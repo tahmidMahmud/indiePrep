@@ -11,6 +11,16 @@ class Test(unittest.TestCase):
 
 		self.assertTrue(True)
 
+	def test_ExplodeNoneItems(self):
+		test = explode(' ', None)
+		
+		self.assertEqual(test, None)
+
+	def test_ExplodeItemsWithNoneDelimiter(self):
+		test = explode(None,'1,2,3')
+
+		self.assertEqual(test, '1,2,3')
+
 	def test_Explode2Items(self):
 		test = explode(' ', '1 2')
 		
@@ -25,6 +35,11 @@ class Test(unittest.TestCase):
 		test = explode(',', '1,2,3')
 		
 		self.assertEqual(test, ['1', '2', '3'])
+
+	def test_Explode3LimitedBy2(self):
+		test = explode(',', '1,2,3', 2)
+		
+		self.assertEqual(test, ['1', '2,3'])
 
 if __name__ == '__main__':
 	unittest.main()
