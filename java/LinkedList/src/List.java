@@ -56,4 +56,14 @@ public class List<T> {
         }
         temp.next = temp.next.next;
     }
+
+    public T get(int index) {
+        List<T> temp = this;
+        int i = 0;
+        while (temp.hasNext() && i < index){
+            temp = temp.next;
+            i++;
+        }
+        return temp.next.data;
+    }
 }
