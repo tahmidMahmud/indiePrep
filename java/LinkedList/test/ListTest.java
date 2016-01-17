@@ -123,5 +123,5 @@ public class ListTest {
         assertEquals(list.sort().toString(), "7 25 31 37 62 65 145 237 242 535 578 691");
     }
 
-    
+
 }

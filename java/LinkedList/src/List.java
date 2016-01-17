@@ -72,13 +72,13 @@ public class List<T> {
 
         for(int i = 0; i < size-1; i++){
             for(int j = i+1; j < size; j++){
-                T iData  = this.get(i);
-                T jData  = this.get(j);
+                T iData  = get(i);
+                T jData  = get(j);
                 if((Integer)iData > (Integer)jData) {
-                    this.add(iData, j+1);
-                    this.remove(j);
-                    this.add(jData, i+1);
-                    this.remove(i);
+                    add(iData, j+1);
+                    remove(j);
+                    add(jData, i+1);
+                    remove(i);
                 }
             }
         }
