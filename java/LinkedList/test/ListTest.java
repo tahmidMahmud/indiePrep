@@ -104,4 +104,24 @@ public class ListTest {
         assertEquals((int)list.get(1), 1);
     }
 
+    @Test
+    public void sortIntegerList(){
+        list.add(25);
+        list.add(37);
+        list.add(7);
+        list.add(237);
+        list.add(31);
+        list.add(65);
+        list.add(62);
+        list.add(145);
+        list.add(535);
+        list.add(242);
+        list.add(691);
+        list.add(578);
+
+
+        assertEquals(list.sort().toString(), "7 25 31 37 62 65 145 237 242 535 578 691");
+    }
+
+    
 }

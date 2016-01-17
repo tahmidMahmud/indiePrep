@@ -55,6 +55,7 @@ public class List<T> {
             i++;
         }
         temp.next = temp.next.next;
+        size--;
     }
 
     public T get(int index) {
@@ -65,5 +66,22 @@ public class List<T> {
             i++;
         }
         return temp.next.data;
+    }
+
+    public List<T> sort(){
+
+        for(int i = 0; i < size-1; i++){
+            for(int j = i+1; j < size; j++){
+                T iData  = this.get(i);
+                T jData  = this.get(j);
+                if((Integer)iData > (Integer)jData) {
+                    this.add(iData, j+1);
+                    this.remove(j);
+                    this.add(jData, i+1);
+                    this.remove(i);
+                }
+            }
+        }
+        return this;
     }
 }
