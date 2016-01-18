@@ -70,17 +70,19 @@ public class List<T> {
 
     public List<T> sort(){
 
-        for(int i = 0; i < size-1; i++){
-            for(int j = i+1; j < size; j++){
-                T iData  = get(i);
-                T jData  = get(j);
-                if((Integer)iData > (Integer)jData) {
-                    add(iData, j+1);
-                    remove(j);
-                    add(jData, i+1);
-                    remove(i);
+        List<T> tempA = this;
+        List<T> tempB = this;
+        while(tempA.hasNext()){
+            while(tempB.hasNext()){
+                if((Integer)tempA.next.data < (Integer)tempB.next.data){
+                    T temp = tempA.next.data;
+                    tempA.next.data = tempB.next.data;
+                    tempB.next.data = temp;
                 }
+                tempB = tempB.next;
             }
+            tempB = this;
+            tempA = tempA.next;
         }
         return this;
     }
