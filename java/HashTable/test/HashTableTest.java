@@ -2,9 +2,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 public class HashTableTest {
@@ -41,8 +39,53 @@ public class HashTableTest {
             testArray[i] = "a";
         }
 
-
-
         Assert.assertArrayEquals(hashTable.getTable(), testArray);
+    }
+
+    @Test
+    public void findWithoutCollision(){
+        hashTable.insert("f");
+
+        assertEquals(hashTable.find("f"), 5);
+    }
+
+    @Test
+    public void findWithCollision(){
+        hashTable.insert("art");
+        hashTable.insert("ark");
+        hashTable.insert("arm");
+
+        assertEquals(hashTable.find("arm"), 2);
+    }
+
+    @Test
+    public void numberOfCollisions(){
+        hashTable.insert("art");
+        hashTable.insert("ark");
+        hashTable.insert("arm");
+        hashTable.insert("ate");
+
+        assertEquals(hashTable.numberOfCollisions(), 6);
+    }
+
+    @Test
+    public void newHashFunction(){
+        hashTable.setHashFunction(new HashFunction() {
+            @Override
+            public int hash(String string, int sizeOfHashTable) {
+                int hashKeyValue = 0;
+                for(int i = 0; i < string.length(); i++){
+                    hashKeyValue = (hashKeyValue * 27 + (string.charAt(i)-97)) % sizeOfHashTable;
+                }
+                return hashKeyValue;
+            }
+        });
+
+        hashTable.insert("art");
+        hashTable.insert("ark");
+        hashTable.insert("arm");
+        hashTable.insert("ate");
+
+        assertEquals(hashTable.numberOfCollisions(), 0);
     }
 }
