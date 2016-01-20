@@ -123,5 +123,61 @@ public class ListTest {
         assertEquals(list.sort().toString(), "7 25 31 37 62 65 145 237 242 535 578 691");
     }
 
+    @Test
+    public void findMiddleItemWhenEven(){
+        list.add(25);
+        list.add(37);
+
+        assertEquals((int)list.findMiddleItiem(), 25);
+    }
+
+    @Test
+    public void findMiddleItemWhenOdd(){
+
+        list.add(25);
+        list.add(37);
+        list.add(7);
+        list.add(237);
+        list.add(31);
+        list.add(65);
+        list.add(62);
+        list.add(145);
+        list.add(535);
+
+        assertEquals((int)list.findMiddleItiem(), 31);
+    }
+
+    @Test
+    public void findLoopsFalse(){
+        list.add(25);
+        list.add(37);
+        list.add(7);
+        list.add(237);
+        list.add(31);
+        list.add(65);
+        list.add(62);
+        list.add(145);
+        list.add(535);
+
+        assertFalse(list.hasLoop());
+    }
+
+    @Test
+    public void findLoopsTrue(){
+        list.add(25);
+        list.add(37);
+        list.add(7);
+        list.add(237);
+        list.add(31);
+        list.add(65);
+        list.add(62);
+        list.add(145);
+        list.add(535);
+        list.appendaList(list);
+
+        assertTrue(list.hasLoop());
+    }
+
+
 
 }

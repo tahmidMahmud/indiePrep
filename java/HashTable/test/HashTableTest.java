@@ -88,4 +88,6 @@ public class HashTableTest {
 
         assertEquals(hashTable.numberOfCollisions(), 0);
     }
+
+
 }

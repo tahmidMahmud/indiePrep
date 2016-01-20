@@ -86,4 +86,39 @@ public class List<T> {
         }
         return this;
     }
+
+    public T findMiddleItiem(){
+        List<T> tempA = this;
+        List<T> tempB = this;
+        while(tempA.hasNext()){
+            tempA = tempA.next;
+            tempB = tempB.next;
+            if(tempA.hasNext()){
+                tempA = tempA.next;
+
+            }
+        }
+        return tempB.data;
+    }
+
+    public boolean hasLoop(){
+        List<T> tempA = this;
+        List<T> tempB = this;
+        while(tempA.hasNext() && tempA.next.hasNext()){
+            if(tempA.next == tempB){
+                return true;
+            }
+            tempA = tempA.next.next;
+            tempB = tempB.next;
+        }
+        return false;
+    }
+
+    public void appendaList(List<T> newList){
+        List<T> tempA = this;
+        while(tempA.hasNext()){
+            tempA = tempA.next;
+        }
+        tempA.next = newList.next;
+    }
 }
